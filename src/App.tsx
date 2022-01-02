@@ -1,23 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Box from '@mui/material/Box';
+
+import pizza from './assets/pizza.png';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={pizza} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Welcome to Bepoz Pizza
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Box sx={{ '& button': { m: 1 } }}>
+          <div>
+          <Button variant="outlined" href="/login" >Login</Button>
+          <Button variant="outlined" >Signup</Button>
+          </div></Box>
       </header>
     </div>
   );

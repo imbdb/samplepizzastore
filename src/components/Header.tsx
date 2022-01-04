@@ -6,17 +6,20 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import Switch from '@mui/material/Switch'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormGroup from '@mui/material/FormGroup'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
-import { useAppSelector } from '../state/hooks'
+import { useAppSelector, useAppDispatch } from '../state/hooks'
+import { checkAuth, User } from '../services/authservice'
+import { logout } from '../state/customer/AuthSlice'
+import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
     const auth = useAppSelector((state) => state.auth.loggedIn)
+    const user = useAppSelector((state) => state.auth.user)
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState(null)
-
+    checkAuth(auth)
     const handleMenu = (event: any) => {
         setAnchorEl(event.currentTarget)
     }
@@ -25,18 +28,16 @@ export default function Header() {
         setAnchorEl(null)
     }
 
+    const handleLogout = () => {
+        dispatch(logout())
+        setAnchorEl(null)
+        navigate('/')
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}>
-                        <MenuIcon />
-                    </IconButton>
                     <Typography
                         variant="h6"
                         component="div"
@@ -45,6 +46,12 @@ export default function Header() {
                     </Typography>
                     {auth && (
                         <div>
+                            <Typography
+                                variant="h6"
+                                component="span"
+                                style={{ verticalAlign: 'middle' }}>
+                                {(user as User).name}
+                            </Typography>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -68,11 +75,8 @@ export default function Header() {
                                 }}
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}>
-                                <MenuItem onClick={handleClose}>
-                                    Profile
-                                </MenuItem>
-                                <MenuItem onClick={handleClose}>
-                                    My account
+                                <MenuItem onClick={handleLogout}>
+                                    Logout
                                 </MenuItem>
                             </Menu>
                         </div>

@@ -1,10 +1,9 @@
-import { Box, Button, Paper } from '@mui/material'
-import ProductList from '../../components/ProductList/ProductList'
+import { Box, Button } from '@mui/material'
 import React from 'react'
-import Header from '../../components/Header'
 import './CartFooter.css'
 import { useAppSelector } from '../../state/hooks'
 import { Product } from '../../state/product/ProductListSlice'
+import { useNavigate } from 'react-router-dom'
 
 interface ProductObj {
     [key: string]: Product
@@ -13,7 +12,7 @@ interface ProductObj {
 function CartFooter() {
     const cart = useAppSelector((state) => state.product.cart)
     const products = useAppSelector((state) => state.product.products)
-
+    let navigate = useNavigate()
     function getProductObject(): ProductObj {
         let productObject: ProductObj = {}
         for (let product of products) {
@@ -31,13 +30,21 @@ function CartFooter() {
         return total
     }
 
+    function gotoCheckout(e: React.MouseEvent) {
+        navigate('/checkout')
+    }
+
     return (
         <div className="footer">
             <Box sx={{ p: 2 }}>
                 <span className="footer-total">
                     Total: {calculateTotal().toFixed(2)}
                 </span>
-                <Button variant="contained" color="success" size="large">
+                <Button
+                    variant="contained"
+                    color="success"
+                    size="large"
+                    onClick={gotoCheckout}>
                     Continue to Checkout
                 </Button>
             </Box>

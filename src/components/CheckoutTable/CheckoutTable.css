@@ -1,0 +1,16 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 1px 1px 6px 0px #555;
+    text-align: right;
+    background-color: #fff;
+}
+.footer .footer-total {
+    font-size: 2rem;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.footer Button {
+}

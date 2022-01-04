@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../../components/Header'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
@@ -7,11 +6,26 @@ import { Button, FormGroup } from '@mui/material'
 import { Bepoz } from '../../components'
 import { User, checkLogin } from '../../services/authservice'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from '../../state/hooks'
+import { login } from '../../state/customer/AuthSlice'
+
+interface LoginProps {
+    email: string
+    password: string
+}
 
 function Login() {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+
+    const loggedIn = useAppSelector((state) => state.auth.loggedIn)
+    const dispatch = useAppDispatch()
+
     let navigate = useNavigate()
+
+    if (loggedIn) {
+        navigate('/home')
+    }
 
     const handleSubmit = (event: React.MouseEvent) => {
         event.preventDefault()
@@ -19,17 +33,17 @@ function Login() {
             alert('Please fill in all fields')
             return
         }
-        const user: User = {
+        const loginReq: LoginProps = {
             email: username,
             password: password,
         }
-        let u = checkLogin(user)
+        let u = checkLogin(loginReq)
         if (u) {
+            dispatch(login(u))
             navigate('/home')
         } else {
             alert('Login failed')
         }
-        console.log(username, password)
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import ProductList from '../../components/ProductList/ProductList'
 import React from 'react'
 import Header from '../../components/Header'
@@ -8,7 +8,6 @@ import { useAppSelector } from '../../state/hooks'
 
 function Home() {
     const cart = useAppSelector((state) => state.product.cart)
-
     return (
         <div className="">
             <Header />

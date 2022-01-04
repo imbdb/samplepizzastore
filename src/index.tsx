@@ -9,6 +9,7 @@ import './index.css'
 import App from './App'
 import { Login, Home } from './routes'
 import reportWebVitals from './reportWebVitals'
+import Checkout from './routes/Checkout/Checkout'
 
 ReactDOM.render(
     <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
                     <Route path="/" element={<App />} />
                     <Route path="login" element={<Login />} />
                     <Route path="home" element={<Home />} />
+                    <Route path="checkout" element={<Checkout />} />
                     <Route
                         path="*"
                         element={

@@ -1,0 +1,10 @@
+.product-quantity-wrapper {
+    text-align: right;
+    font-size: 2.5rem;
+}
+.product-quantity-wrapper IconButton {
+    margin: 1rem;
+}
+.product-list {
+    padding-bottom: 125px;
+}

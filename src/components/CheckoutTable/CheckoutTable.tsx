@@ -63,12 +63,13 @@ function CheckoutTable() {
                                 {products[cartItem.id].name}
                             </TableCell>
                             <TableCell align="right">
-                                {products[cartItem.id].price}
+                                ${products[cartItem.id].price}
                             </TableCell>
                             <TableCell align="right">
                                 {cartItem.quantity}
                             </TableCell>
                             <TableCell align="right">
+                                $
                                 {products[cartItem.id].price *
                                     cartItem.quantity}
                             </TableCell>

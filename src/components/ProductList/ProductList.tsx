@@ -57,7 +57,7 @@ function ProductList() {
                 <Paper
                     sx={{ pb: 2, px: 2, mb: 2, mx: 2, borderRadius: '10px' }}
                     variant="outlined"
-                    className="product-wrapper"
+                    className={'product-wrapper p-' + product.id}
                     key={product.id}>
                     <Grid container>
                         <Grid item md={9}>
@@ -72,6 +72,7 @@ function ProductList() {
                                 sx={{ p: 2 }}
                                 className="product-quantity-wrapper">
                                 <IconButton
+                                    className="remove-button"
                                     aria-label="remove"
                                     onClick={(e) =>
                                         handleRemove(e, product.id)
@@ -79,11 +80,14 @@ function ProductList() {
                                     <RemoveIcon fontSize="large" />
                                 </IconButton>
                                 {cart[product.id] ? (
-                                    <span>{cart[product.id].quantity}</span>
+                                    <span className="p-qty">
+                                        {cart[product.id].quantity}
+                                    </span>
                                 ) : (
-                                    <span>0</span>
+                                    <span className="p-qty">0</span>
                                 )}
                                 <IconButton
+                                    className="add-button"
                                     aria-label="add"
                                     onClick={(e) => handleAdd(e, product.id)}>
                                     <AddIcon fontSize="large" />

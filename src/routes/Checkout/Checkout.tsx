@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import Header from '../../components/Header'
 import './Checkout.css'
@@ -45,11 +45,14 @@ function Home() {
                 <CheckoutTable />
                 <h3>Applied Offer</h3>
                 {total.appliedPricingRules.map((rule) => (
-                    <p key={rule.id}>{rule.name}</p>
+                    <i key={rule.id} className={'offer-' + rule.id}>
+                        {rule.name}
+                    </i>
                 ))}
-                <p>
-                    <strong>Total:</strong> {total.total.toFixed(2)}
-                </p>
+                <h3>Total:</h3>{' '}
+                <Typography variant="h4" className="total">
+                    ${total.total.toFixed(2)}
+                </Typography>
             </Box>
         </div>
     )

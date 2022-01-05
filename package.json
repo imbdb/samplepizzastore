@@ -29,7 +29,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "cypress:open": "cypress open"
     },
     "eslintConfig": {
         "extends": [
@@ -51,6 +52,7 @@
     },
     "devDependencies": {
         "@types/redux-localstorage": "^1.0.8",
+        "cypress": "^9.2.0",
         "eslint-config-prettier": "^8.3.0",
         "prettier": "2.5.1"
     }

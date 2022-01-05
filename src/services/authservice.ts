@@ -26,6 +26,12 @@ export const users: User[] = [
         email: 'pizza@facebook.com',
         password: '123123',
     },
+    {
+        id: '4',
+        name: 'Bharat',
+        email: 'pizza@bharat.com',
+        password: '123123',
+    },
 ]
 
 export const checkLogin = (user: { email: string; password: string }) => {

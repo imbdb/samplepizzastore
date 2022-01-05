@@ -1,15 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Provider } from 'react-redux'
 import store from './state/store'
-
+import { useAppSelector } from './state/hooks'
 import './index.css'
 import App from './App'
 import { Login, Home } from './routes'
 import reportWebVitals from './reportWebVitals'
 import Checkout from './routes/Checkout/Checkout'
+
+function RequireAuth({
+    children,
+    redirectTo,
+}: {
+    children: JSX.Element
+    redirectTo: string
+}) {
+    const auth = useAppSelector((state) => state.auth.loggedIn)
+    return auth ? children : <Navigate to={redirectTo} />
+}
 
 ReactDOM.render(
     <React.StrictMode>
@@ -19,8 +30,22 @@ ReactDOM.render(
                 <Routes>
                     <Route path="/" element={<App />} />
                     <Route path="login" element={<Login />} />
-                    <Route path="home" element={<Home />} />
-                    <Route path="checkout" element={<Checkout />} />
+                    <Route
+                        path="home"
+                        element={
+                            <RequireAuth redirectTo="/">
+                                <Home />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="checkout"
+                        element={
+                            <RequireAuth redirectTo="/">
+                                <Checkout />
+                            </RequireAuth>
+                        }
+                    />
                     <Route
                         path="*"
                         element={
